@@ -5,10 +5,14 @@ module rounded_cube_z0(width, length, height, radius) {
     y_offset = length - 2 * radius;
 
     hull() {
-        for (x = [-x_offset / 2, x_offset / 2])
-            for (y = [-y_offset / 2, y_offset / 2])
-                for (z = [radius, height - radius])
-                    translate([x, y, z]) sphere(r=radius);
+        translate([-x_offset / 2, -y_offset / 2, radius]) sphere(r=radius);
+        translate([-x_offset / 2,  y_offset / 2, radius]) sphere(r=radius);
+        translate([ x_offset / 2, -y_offset / 2, radius]) sphere(r=radius);
+        translate([ x_offset / 2,  y_offset / 2, radius]) sphere(r=radius);
+        translate([-x_offset / 2, -y_offset / 2, height - radius]) sphere(r=radius);
+        translate([-x_offset / 2,  y_offset / 2, height - radius]) sphere(r=radius);
+        translate([ x_offset / 2, -y_offset / 2, height - radius]) sphere(r=radius);
+        translate([ x_offset / 2,  y_offset / 2, height - radius]) sphere(r=radius);
     }
 }
 
