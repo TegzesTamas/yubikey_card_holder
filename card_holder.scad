@@ -58,6 +58,44 @@ module card_holder_without_yubikey() {
     }
 }
 
+module nvidia_logo(long_size) {
+    logo_width = long_size;
+    logo_height = logo_width * 258.785 / 351.46;
+
+    color("#769B00"){
+        translate([-logo_width/2, -logo_height*0.29, 0]) {
+            linear_extrude(height=logo_depth)
+                resize([logo_width, logo_height])
+                    import("NVIDIA_logo.svg", center=false);
+        }
+    }
+}
+
+module card_holder_without_yubikey_nvidia() {
+    union() {
+        color("black") {
+            card_holder_without_yubikey();
+        }
+        height_minus_cutout = card_only_height-finger_cutout_radius;
+        translate([0, -total_thickness/2, height_minus_cutout/2]) {
+            rotate([90, 0, 0]) {
+                rotate([0, 0, 90]) {
+                    nvidia_logo(height_minus_cutout*0.90);
+                }   
+            }    
+        }
+        translate([0, total_thickness/2, height_minus_cutout/2]) {
+            rotate([0, 0, 180]) {
+                rotate([90, 0, 0]) {
+                    rotate([0, 0, 90]) {
+                        nvidia_logo(height_minus_cutout*0.90);
+                    }   
+                }    
+            }
+        }
+    }
+}
+
 module usb_c_cutout() {
     hull() {
         translate([-usb_center_distance/2, 0, 0]) cylinder(d=usb_thickness, h=usb_length*2, center=false);
@@ -77,6 +115,34 @@ module yubikey_card_holder() {
 
     }
 }
+
+module yubikey_card_holder_nvidia() {
+    union() {
+        color("black") {
+            yubikey_card_holder();
+        }
+        bottom_margin = wall_thickness+usb_length+yubikey_cutout_height;
+        height_minus_cutout = total_height-finger_cutout_radius-bottom_margin;
+        translate([0, 0, bottom_margin]) {
+            translate([0, -total_thickness/2, height_minus_cutout/2]) {
+                rotate([90, 0, 0]) {
+                    rotate([0, 0, 90]) {
+                        nvidia_logo(height_minus_cutout*0.90);
+                    }   
+                }    
+            }
+            translate([0, total_thickness/2, height_minus_cutout/2]) {
+                rotate([0, 0, 180]) {
+                    rotate([90, 0, 0]) {
+                        rotate([0, 0, 90]) {
+                            nvidia_logo(height_minus_cutout*0.90);
+                        }   
+                    }    
+                }
+            }
+        }
+    }
+}
 //yubikey_card_holder();
 
 module yubikey_tester() {
@@ -85,4 +151,7 @@ module yubikey_tester() {
         translate([0, 0, wall_thickness]) usb_c_cutout();
     }
 }
-yubikey_tester();
+// Select the model to render:
+// card_holder_without_yubikey_nvidia();
+yubikey_card_holder_nvidia();
+// yubikey_tester();
