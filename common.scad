@@ -58,9 +58,10 @@ module nvidia_logo(long_size) {
 
     color("#769B00")
         translate([-logo_width / 2, -logo_height * 0.29, 0])
-            linear_extrude(height=logo_depth)
-                resize([logo_width, logo_height])
-                    import("NVIDIA_logo.svg", center=false);
+            linear_extrude(height=logo_depth+wall_thickness/2)
+                offset(delta=-0.01)
+                    resize([logo_width, logo_height])
+                        import("NVIDIA_logo.svg", center=false);
 }
 
 // Place matching raised logos on both broad faces of a holder.
@@ -72,11 +73,11 @@ module holder_logos(with_yubikey=false) {
     logo_height = body_height - finger_cutout_radius - bottom_margin;
 
     translate([0, 0, bottom_margin]) {
-        translate([0, -total_thickness / 2, logo_height / 2])
+        translate([0, -(total_thickness/2 - wall_thickness/2), logo_height / 2])
             rotate([90, 0, 0]) rotate([0, 0, 90])
                 nvidia_logo(logo_height * 0.90);
 
-        translate([0, total_thickness / 2, logo_height / 2])
+        translate([0, +(total_thickness/2 - wall_thickness/2), logo_height / 2])
             rotate([0, 0, 180]) rotate([90, 0, 0]) rotate([0, 0, 90])
                 nvidia_logo(logo_height * 0.90);
     }
