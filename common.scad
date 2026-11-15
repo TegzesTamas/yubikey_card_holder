@@ -1,4 +1,4 @@
-// Reusable geometry shared by the individual model entry points.
+include <parameters.scad>
 
 module rounded_cube_z0(width, length, height, radius) {
     x_offset = width - 2 * radius;

@@ -3,7 +3,7 @@ $fn = 128;
 
 logo_depth = 0.4;
 
-card_thickness = 1.7;
+card_thickness = 1.65;
 card_width = 58;
 card_height = 85;
 card_height_margin = 3;
@@ -11,8 +11,8 @@ card_height_margin = 3;
 finger_cutout_radius = 20;
 
 usb_length = 8;
-usb_thickness = 2.4;
-usb_width = 8.3;
+usb_thickness = 2.3;
+usb_width = 9;
 yubi_total_height = 10;
 
 yubikey_cutout_width = 13;

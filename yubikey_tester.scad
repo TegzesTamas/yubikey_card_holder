@@ -1,4 +1,3 @@
-include <parameters.scad>
-use <common.scad>
+include <common.scad>
 
 yubikey_tester_model();
