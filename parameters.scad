@@ -12,8 +12,8 @@ finger_cutout_radius = 20;
 
 usb_length = 8;
 usb_thickness = 2.3;
-usb_width = 9;
-yubi_total_height = 10;
+usb_width = 10;
+yubi_total_height = 12;
 
 yubikey_cutout_width = 13;
 yubikey_cutout_height = 13;
